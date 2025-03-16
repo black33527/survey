@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国动画行业从业人员工作生活现状调研</title>
+    <style>
+        body { font-family: "Microsoft YaHei", sans-serif; margin: 20px; }
+        .intro { margin-bottom: 20px; }
+        .question { margin: 15px 0; }
+        .question label { margin-right: 20px; }
+        .submit-btn { background-color: #07c160; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        textarea { width: 100%; height: 100px; }
+    </style>
+</head>
+<body>
+    <div class="intro">
+        <h2>中国动画行业从业人员工作生活现状调研</h2>
+        <p>尊敬的中国动画行业从业人员，您好！我们希望通过本次调研，了解中国动画行业从业人员的工作和生活现状。所有数据匿名处理，预计填写时间：10-15分钟。</p>
+    </div>
+
+    <form id="surveyForm" onsubmit="submitForm(event)">
+        <!-- Q1 性别 -->
+        <div class="question">
+            <p><strong>Q1. 您的性别是？*</strong></p>
+            <label><input type="radio" name="gender" value="女" required> 女</label>
+            <label><input type="radio" name="gender" value="男"> 男</label>
+        </div>
+
+        <!-- Q2 年龄 -->
+        <div class="question">
+            <p><strong>Q2. 您的年龄是？*</strong></p>
+            <label><input type="radio" name="age" value="18-23" required> 18-23周岁</label>
+            <label><input type="radio" name="age" value="24-35"> 24-35周岁</label>
+            <label><input type="radio" name="age" value="36-47"> 36-47周岁</label>
+            <label><input type="radio" name="age" value="48-59"> 48-59周岁</label>
+            <label><input type="radio" name="age" value="60以上"> 60周岁及以上</label>
+        </div>
+
+        <!-- Q3 从业年限 -->
+        <div class="question">
+            <p><strong>Q3. 您在中国动画行业的从业年限是？*</strong></p>
+            <label><input type="radio" name="experience" value="2年以下" required> 2年以下</label>
+            <label><input type="radio" name="experience" value="2-5年"> 2-5年</label>
+            <label><input type="radio" name="experience" value="5-10年"> 5-10年</label>
+            <label><input type="radio" name="experience" value="10-20年"> 10-20年</label>
+            <label><input type="radio" name="experience" value="20年以上"> 20年以上</label>
+        </div>
+
+        <!-- Q4 专业岗位 -->
+        <div class="question">
+            <p><strong>Q4. 您目前从事的专业岗位是？*</strong></p>
+            <label><input type="radio" name="position" value="原画设计" required> 原画设计</label>
+            <label><input type="radio" name="position" value="3D建模/渲染"> 3D建模/渲染</label>
+            <label><input type="radio" name="position" value="动画制作"> 动画制作</label>
+            <label><input type="radio" name="position" value="后期剪辑/特效"> 后期剪辑/特效</label>
+            <label><input type="radio" name="position" value="编剧/导演"> 编剧/导演</label>
+            <label><input type="radio" name="position" value="其他"> 其他</label>
+        </div>
+
+        <!-- Q5 居住地 -->
+        <div class="question">
+            <p><strong>Q5. 您目前的居住地是？*</strong></p>
+            <select name="region" required>
+                <option value="">请选择</option>
+                <option value="北京市">北京市</option>
+                <option value="上海市">上海市</option>
+                <option value="广东省-广州市">广东省-广州市</option>
+                <option value="四川省-成都市">四川省-成都市</option>
+            </select>
+        </div>
+
+        <!-- Q39 开放题 -->
+        <div class="question">
+            <p><strong>Q39. 您对中国动画行业的现状有何看法或建议？</strong></p>
+            <textarea name="opinion" placeholder="请畅所欲言"></textarea>
+        </div>
+
+        <!-- Q40 开放题 -->
+        <div class="question">
+            <p><strong>Q40. 您对您在中国动画行业的发展有何展望或期许？</strong></p>
+            <textarea name="expectation" placeholder="请畅所欲言"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">提交问卷</button>
+    </form>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            const form = document.getElementById('surveyForm');
+            const formData = new FormData(form);
+            let data = {};
+            formData.forEach((value, key) => data[key] = value);
+
+            const jsonData = JSON.stringify(data, null, 2);
+            const blob = new Blob([jsonData], { type: 'application/json' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'survey_response.json';
+            link.click();
+
+            alert('提交成功！请将下载的文件发送给我们，感谢您的参与！');
+        }
+    </script>
+</body>
+</html>
